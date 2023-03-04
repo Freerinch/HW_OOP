@@ -93,7 +93,7 @@ first_reviewer = Reviewer("Кира", "Ярмыш", ['Python', 'C++'])
 second_reviewer = Reviewer("Люба", "Соболь", ["Advertisement", "Java"])
 
 first_student.courses_in_progress += ["Python", "C++"]
-second_student.courses_in_progress += ["Advertisement", "Java"]
+second_student.courses_in_progress += ["Advertisement", "C++"]
 first_student.finished_courses += ["ChatGPT"]
 second_student.finished_courses += ["GIT"]
 
@@ -104,38 +104,40 @@ first_student.rate_lectors(second_lecturer, "Advertisement", 8)
 
 second_student.rate_lectors(second_lecturer, "Java", 9)
 second_student.rate_lectors(second_lecturer, "Advertisement", 10)
-second_student.rate_lectors(first_lecturer, 'Python', 4)
+second_student.rate_lectors(first_lecturer, "Python", 4)
 
 first_reviewer.rate_hw(first_student, "Python", 6)
-first_reviewer.rate_hw(first_student, 'C++', 9)
-first_reviewer.rate_hw(first_student, 'Java', 6)
-first_reviewer.rate_hw(second_student, 'Advertisement', 6)
-first_reviewer.rate_hw(second_student, 'Git', 9)
-first_reviewer.rate_hw(second_student, 'C++', 7)
+first_reviewer.rate_hw(first_student, "C++", 9)
+first_reviewer.rate_hw(first_student, "Java", 6)
+first_reviewer.rate_hw(second_student, "Advertisement", 6)
+first_reviewer.rate_hw(second_student, "Git", 9)
+first_reviewer.rate_hw(second_student, "C++", 7)
 
-second_reviewer.rate_hw(first_student, 'Python', 6)
-second_reviewer.rate_hw(first_student, 'Python', 9)
-second_reviewer.rate_hw(first_student, 'C++', 9)
-second_reviewer.rate_hw(second_student, 'Java', 6)
-second_reviewer.rate_hw(second_student, 'Advertisement', 9)
-second_reviewer.rate_hw(second_student, 'Python', 7)
+second_reviewer.rate_hw(first_student, "Python", 6)
+second_reviewer.rate_hw(first_student, "Python", 9)
+second_reviewer.rate_hw(first_student, "C++", 9)
+second_reviewer.rate_hw(second_student, "Java", 6)
+second_reviewer.rate_hw(second_student, "Advertisement", 9)
+second_reviewer.rate_hw(second_student, "Python", 7)
 
 student_list = [first_student, second_student]
 
 
 def mid_grade_course(student_list, course):
     all_student_avg_grades = []
-    for student in student_list:
-        if course not in student.courses_in_progress:
-            return "нет курса"
+    for st in student_list:
+        if course in st.courses_in_progress:
+             all_student_avg_grades.extend(st.grades[course])
+
         else:
-            all_student_avg_grades.extend(student.grades[course])
+          print(f"{st.name} не проходит курс {course}")
+
 
     return round(sum(all_student_avg_grades) / len(all_student_avg_grades), 2)
 
 
 # print(first_lecturer.__lt__(second_lecturer))
-print(mid_grade_course(student_list, "Java"))
+print(mid_grade_course(student_list, ("Python")))
 # print(first_student.courses_in_progress)
 
 
